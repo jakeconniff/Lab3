@@ -15,12 +15,18 @@ import UIKit
 
 /// A `DrawingItem` that draws some shape to the screen.
 class Shape: DrawingItem {
+    var path : UIBezierPath
     var origin : CGPoint
     var color : UIColor
-    
-    required init(origin: CGPoint, color: UIColor){
+    var scaleFactor : CGFloat
+    required init(origin: CGPoint, color: UIColor, scale: CGFloat){
+        self.path = UIBezierPath()
         self.origin = origin
         self.color = color
+        self.scaleFactor = scale
+    }
+    required init(origin: CGPoint, color: UIColor) {
+        fatalError("init(origin:color:) has not been implemented")
     }
     
     func draw() {

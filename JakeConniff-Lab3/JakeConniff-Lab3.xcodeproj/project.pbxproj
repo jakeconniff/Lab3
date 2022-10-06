@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DCAE7AD028EE742900B221C6 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7ACF28EE742900B221C6 /* Functions.swift */; };
 		DCAE7AD228EE858400B221C6 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD128EE858400B221C6 /* Circle.swift */; };
-		DCAE7AD428EE858D00B221C6 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD328EE858D00B221C6 /* CircleView.swift */; };
 		DCAE7AD628EE8DFB00B221C6 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD528EE8DFB00B221C6 /* Square.swift */; };
 		DCAE7AD828EE924300B221C6 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD728EE924300B221C6 /* Triangle.swift */; };
 		DCCD414A28EDDD2F0075FD0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD414928EDDD2F0075FD0F /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		DCAE7ACF28EE742900B221C6 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		DCAE7AD128EE858400B221C6 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
-		DCAE7AD328EE858D00B221C6 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		DCAE7AD528EE8DFB00B221C6 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		DCAE7AD728EE924300B221C6 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		DCCD414628EDDD2F0075FD0F /* JakeConniff-Lab3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JakeConniff-Lab3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +84,6 @@
 				DCCD415428EDDD310075FD0F /* LaunchScreen.storyboard */,
 				DCCD415728EDDD310075FD0F /* Info.plist */,
 				DCAE7AD128EE858400B221C6 /* Circle.swift */,
-				DCAE7AD328EE858D00B221C6 /* CircleView.swift */,
 			);
 			path = "JakeConniff-Lab3";
 			sourceTree = "<group>";
@@ -163,7 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCAE7AD628EE8DFB00B221C6 /* Square.swift in Sources */,
-				DCAE7AD428EE858D00B221C6 /* CircleView.swift in Sources */,
 				DCCD414E28EDDD2F0075FD0F /* ViewController.swift in Sources */,
 				DCAE7AD228EE858400B221C6 /* Circle.swift in Sources */,
 				DCCD414A28EDDD2F0075FD0F /* AppDelegate.swift in Sources */,

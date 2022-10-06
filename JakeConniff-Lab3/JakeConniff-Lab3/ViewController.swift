@@ -11,13 +11,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var drawingView: DrawingView!
     
-    
     @IBOutlet weak var shapeSegment: UISegmentedControl!
     @IBOutlet weak var modeSegment: UISegmentedControl!
     
     @IBAction func clearDrawings(_ sender: Any) {
-//        circleCanvas.theCircle = nil
-//        circleCanvas.circles = []
+        drawingView.items = []
     }
     enum DrawShape{
         case Square
@@ -36,30 +34,26 @@ class ViewController: UIViewController {
     var currentCircle: Circle?
     var currentSquare: Square?
     var currentTriangle: Triangle?
-//    var circleCanvas: CircleView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-//        circleCanvas = CircleView(frame: view.frame)
-//        view.addSubview(circleCanvas)
-        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        let touchPoint = (touches.first)!.location(in: view) as CGPoint
+        let touchPoint = (touches.first)!.location(in: drawingView) as CGPoint
         switch currentMode{
         case .Draw:
             switch currentShape {
             case .Square:
-                currentSquare = Square(origin: touchPoint, color: currentColor, length: 0)
+                currentSquare = Square(origin: touchPoint, color: currentColor, scale: 20)
+                drawingView.items.append(currentSquare!)
             case .Circle:
-                break
+                currentCircle = Circle(origin: touchPoint, color: currentColor, scale: 20)
+                drawingView.items.append(currentCircle!)
             case .Triangle:
-                break
+                currentTriangle = Triangle(origin: touchPoint, color: currentColor, scale: 20)
+                drawingView.items.append(currentTriangle!)
             }
         case .Move:
             break
@@ -69,19 +63,39 @@ class ViewController: UIViewController {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchPoint = (touches.first)!.location(in: view) as CGPoint
+        let touchPoint = (touches.first)!.location(in: drawingView) as CGPoint
         
         switch currentMode {
         case .Draw:
             switch currentShape {
             case .Square:
                 let distance = Functions.distance(a: touchPoint, b: (currentSquare?.origin)!)
-                currentSquare?.length = distance * 2
-                drawingView.setNeedsDisplay()
+                print("Distance \(distance)")
+                currentSquare?.scaleFactor = distance * 2
+                
+                if let newSquare = currentSquare {
+                    print("Drawn length \(newSquare.scaleFactor)")
+                    drawingView.items.removeLast()
+                    drawingView.items.append(newSquare)
+                }
             case .Circle:
-                break
+                let distance = Functions.distance(a: touchPoint, b: (currentCircle?.origin)!)
+                currentCircle?.scaleFactor = distance
+                
+                if let newCircle = currentCircle {
+                    
+                    drawingView.items.removeLast()
+                    drawingView.items.append(newCircle)
+                }
             case .Triangle:
-                break
+                let distance = Functions.distance(a: touchPoint, b: (currentTriangle?.origin)!)
+                currentTriangle?.scaleFactor = distance
+                
+                if let newTriangle = currentTriangle {
+                    
+                    drawingView.items.removeLast()
+                    drawingView.items.append(newTriangle)
+                }
             }
         case .Move:
             break
@@ -95,20 +109,18 @@ class ViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch currentMode {
         case .Draw:
-            switch currentShape {
+            break
+        case .Move:
+            break
+        case .Erase:
+            switch currentShape{
             case .Square:
-                if let newSquare = currentSquare {
-                    drawingView.items.append(newSquare)
-                }
+                break
             case .Circle:
                 break
             case .Triangle:
                 break
             }
-        case .Move:
-            break
-        case .Erase:
-            break
         }
 //        if let newCircle = currentCircle {
 //            circleCanvas.circles.append(newCircle)

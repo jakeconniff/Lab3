@@ -8,9 +8,23 @@
 
 import UIKit
 
-struct Circle {
+class Circle: Shape {
+    required init(origin: CGPoint, color: UIColor, scale: CGFloat){
+        super.init(origin: origin, color: color, scale: scale)
+    }
     
-    var center: CGPoint
-    var radius: CGFloat
+    required init(origin: CGPoint, color: UIColor) {
+        fatalError("init(origin:color:) has not been implemented")
+    }
     
+    override func draw(){
+        self.color.setFill()
+        
+        self.path.addArc(withCenter: self.origin, radius: self.scaleFactor , startAngle: 0, endAngle: CGFloat(Float.pi * 2), clockwise: true)
+        path.fill()
+    }
+    
+    override func contains(point: CGPoint) -> Bool {
+        return path.contains(point)
+    }
 }

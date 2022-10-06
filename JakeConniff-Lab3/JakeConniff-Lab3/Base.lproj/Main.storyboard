@@ -93,12 +93,12 @@
                                 </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTD-AQ-y5a" customClass="DrawingView" customModule="JakeConniff_Lab3" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="518.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="580.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstItem="iTD-AQ-y5a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1dL-pX-VXt"/>
                             <constraint firstItem="dOQ-zd-1Ry" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="7OX-ub-lcI"/>
@@ -108,7 +108,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ymi-y4-5IP" secondAttribute="trailing" constant="60" id="NpU-XF-ynl"/>
                             <constraint firstItem="xY8-hj-LPa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Rhw-EJ-q83"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ymi-y4-5IP" secondAttribute="bottom" constant="15" id="VHi-DY-mGU"/>
-                            <constraint firstItem="iTD-AQ-y5a" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.67" id="Zd1-0e-qG5"/>
+                            <constraint firstItem="iTD-AQ-y5a" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.75" id="Zd1-0e-qG5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iTD-AQ-y5a" secondAttribute="trailing" id="Zwa-NW-h24"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xY8-hj-LPa" secondAttribute="trailing" constant="20" id="jbx-H1-snf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="iTD-AQ-y5a" secondAttribute="top" id="lR8-zX-1Dk"/>
@@ -116,7 +116,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bXg-sv-6Wj">
-                        <barButtonItem key="rightBarButtonItem" title="X" id="Fq0-Lp-d4a">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="Fq0-Lp-d4a">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="clearDrawings:" destination="BYZ-38-t0r" id="oWK-wt-wEA"/>
