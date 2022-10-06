@@ -15,8 +15,12 @@ import UIKit
 
 /// A `DrawingItem` that draws some shape to the screen.
 class Shape: DrawingItem {
-    public required init(origin: CGPoint, color: UIColor){
-        fatalError("IMPLEMENT THIS")
+    var origin : CGPoint
+    var color : UIColor
+    
+    required init(origin: CGPoint, color: UIColor){
+        self.origin = origin
+        self.color = color
     }
     
     func draw() {
