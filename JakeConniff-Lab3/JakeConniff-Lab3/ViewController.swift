@@ -7,17 +7,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var drawingView: DrawingView!
+    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
+    @IBOutlet var rotateGesture: UIRotationGestureRecognizer!
     
+    @IBOutlet weak var alphaSlider: UISlider!
     @IBOutlet weak var shapeSegment: UISegmentedControl!
     @IBOutlet weak var modeSegment: UISegmentedControl!
+    
+    @IBAction func savePhoto(_ sender: Any) {
+        let rend = UIGraphicsImageRenderer(size: drawingView.bounds.size)
+        let photo = rend.image {
+            ctx in drawingView.drawHierarchy(in: drawingView.bounds, afterScreenUpdates: true)
+        }
+        UIImageWriteToSavedPhotosAlbum(photo,nil,nil,nil)
+    }
     
     @IBAction func clearDrawings(_ sender: Any) {
         drawingView.items = []
     }
-    enum DrawShape{
+    enum ThisShape{
         case Square
         case Circle
         case Triangle
@@ -28,104 +39,106 @@ class ViewController: UIViewController {
         case Erase
     }
     var currentMode = Mode.Draw
-    var currentShape = DrawShape.Square
+    var currentShape = ThisShape.Square
     var currentColor = UIColor.systemRed
     
+    var currentRadius :CGFloat = 0
     var currentCircle: Circle?
     var currentSquare: Square?
     var currentTriangle: Triangle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        drawingView.addGestureRecognizer(pinchGesture)
+        drawingView.addGestureRecognizer(rotateGesture)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        guard touches.count == 1 else { return }
         let touchPoint = (touches.first)!.location(in: drawingView) as CGPoint
         switch currentMode{
         case .Draw:
             switch currentShape {
             case .Square:
-                currentSquare = Square(origin: touchPoint, color: currentColor, scale: 20)
+                currentSquare = Square(type: "Square", origin: touchPoint, color: currentColor.withAlphaComponent(CGFloat(alphaSlider.value)), scale: 50)
+                guard currentSquare != nil else{return}
                 drawingView.items.append(currentSquare!)
             case .Circle:
-                currentCircle = Circle(origin: touchPoint, color: currentColor, scale: 20)
+                currentCircle = Circle(type: "Circle", origin: touchPoint, color: currentColor.withAlphaComponent(CGFloat(alphaSlider.value)), scale: 50)
+                guard currentCircle != nil else{return}
                 drawingView.items.append(currentCircle!)
             case .Triangle:
-                currentTriangle = Triangle(origin: touchPoint, color: currentColor, scale: 20)
+                currentTriangle = Triangle(type: "Triangle", origin: touchPoint, color: currentColor.withAlphaComponent(CGFloat(alphaSlider.value)), scale: 50)
+                guard currentTriangle != nil else{return}
                 drawingView.items.append(currentTriangle!)
             }
         case .Move:
-            break
+            if let index = drawingView.items.firstIndex(where:{$0.contains(point: touchPoint)}){
+                let current : Shape = drawingView.items[index] as! Shape
+                switch current.type{
+                case "Square":
+                    currentSquare = (current as! Square)
+                    currentShape = .Square
+                    drawingView.items.remove(at: index)
+                    guard currentSquare != nil else {return}
+                    drawingView.items.append(currentSquare!)
+                case "Circle":
+                    currentCircle = (current as! Circle)
+                    currentShape = .Circle
+                case "Triangle":
+                    currentTriangle = (current as! Triangle)
+                    currentShape = .Triangle
+                default:
+                    break
+                }
+            }
         case .Erase:
-            break
+            if let index = drawingView.items.firstIndex(where: {$0.contains(point: touchPoint)}){
+                drawingView.items.remove(at:index)
+            }
         }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchPoint = (touches.first)!.location(in: drawingView) as CGPoint
+        let touchPoint = (touches.first)!.location(in: drawingView) as  CGPoint
         
         switch currentMode {
         case .Draw:
-            switch currentShape {
-            case .Square:
-                let distance = Functions.distance(a: touchPoint, b: (currentSquare?.origin)!)
-                print("Distance \(distance)")
-                currentSquare?.scaleFactor = distance * 2
-                
-                if let newSquare = currentSquare {
-                    print("Drawn length \(newSquare.scaleFactor)")
-                    drawingView.items.removeLast()
-                    drawingView.items.append(newSquare)
-                }
-            case .Circle:
-                let distance = Functions.distance(a: touchPoint, b: (currentCircle?.origin)!)
-                currentCircle?.scaleFactor = distance
-                
-                if let newCircle = currentCircle {
-                    
-                    drawingView.items.removeLast()
-                    drawingView.items.append(newCircle)
-                }
-            case .Triangle:
-                let distance = Functions.distance(a: touchPoint, b: (currentTriangle?.origin)!)
-                currentTriangle?.scaleFactor = distance
-                
-                if let newTriangle = currentTriangle {
-                    
-                    drawingView.items.removeLast()
-                    drawingView.items.append(newTriangle)
-                }
-            }
-        case .Move:
             break
+        case .Move:
+            //draw recognize delete redraw
+            switch currentShape{
+            case .Square:
+                currentSquare?.origin = touchPoint
+                guard currentSquare != nil else {return}
+                drawingView.items.remove(at: drawingView.items.count-1)
+                drawingView.items.append(currentSquare!)
+            case .Circle:
+                currentCircle?.origin = touchPoint
+                guard currentCircle != nil else {return}
+                drawingView.items.remove(at: drawingView.items.count-1)
+                drawingView.items.append(currentCircle!)
+            case .Triangle:
+                currentTriangle?.origin = touchPoint
+                guard currentTriangle != nil else {return}
+                drawingView.items.remove(at: drawingView.items.count-1)
+                drawingView.items.append(currentTriangle!)
+            }
         case .Erase:
             break
         }
-        //currentCircle?.radius = distance
-        //circleCanvas.theCircle = currentCircle
-
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch currentMode {
         case .Draw:
             break
         case .Move:
-            break
+            currentSquare = nil
+            currentCircle = nil
+            currentTriangle = nil
         case .Erase:
-            switch currentShape{
-            case .Square:
-                break
-            case .Circle:
-                break
-            case .Triangle:
-                break
-            }
+            break
         }
-//        if let newCircle = currentCircle {
-//            circleCanvas.circles.append(newCircle)
-//        }s
-
     }
     
     //switching color to draw with
@@ -152,6 +165,9 @@ class ViewController: UIViewController {
             currentMode = .Draw
         case 1:
             currentMode = .Move
+            currentSquare = nil
+            currentCircle = nil
+            currentTriangle = nil
         case 2:
             currentMode = .Erase
         default:
@@ -173,5 +189,94 @@ class ViewController: UIViewController {
         }
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+    shouldRecognizeSimultaneouslyWith otherGestureRecognizer:
+    UIGestureRecognizer) -> Bool {
+    true }
+    
+    @IBAction func pinchActivated(_ sender: UIPinchGestureRecognizer) {
+        switch currentMode{
+        case .Draw:
+            break
+        case .Move:
+            if let index = drawingView.items.firstIndex(where:{$0.contains(point: sender.location(in:drawingView))}){
+                //it's definitely pinching
+                let current : Shape = drawingView.items[index] as! Shape
+                switch current.type{
+                case "Square":
+                    currentSquare = (current as! Square)
+                    if sender.state.rawValue == 1{
+                        currentRadius = currentSquare!.scaleFactor
+                    }
+                    currentSquare?.scaleFactor = currentRadius * sender.scale
+                    drawingView.items.remove(at: index)
+                    drawingView.items.append(currentSquare!)
+                case "Circle":
+                    currentCircle = (current as! Circle)
+                    if sender.state.rawValue == 1{
+                        currentRadius = currentCircle!.scaleFactor
+                    }
+                    currentCircle?.scaleFactor = currentRadius * sender.scale
+                    drawingView.items.remove(at: index)
+                    drawingView.items.append(currentCircle!)
+                case "Triangle":
+                    currentTriangle = (current as! Triangle)
+                    if sender.state.rawValue == 1{
+                        currentRadius = currentTriangle!.scaleFactor
+                    }
+                    currentTriangle?.scaleFactor = currentRadius * sender.scale
+                    drawingView.items.remove(at: index)
+                    drawingView.items.append(currentTriangle!)
+                default:
+                    break
+                }
+                print(sender.state.rawValue)
+            }
+        case .Erase:
+            break
+        }
+    }
+    
+    @IBAction func rotateActivated(_ sender: UIRotationGestureRecognizer) {
+        switch currentMode{
+        case .Draw:
+            break
+        case .Move:
+            if let index = drawingView.items.firstIndex(where:{$0.contains(point: sender.location(in:drawingView))}){
+                //it's definitely pinching
+                let current : Shape = drawingView.items[index] as! Shape
+                switch current.type{
+                case "Square":
+                    currentSquare = (current as! Square)
+                    if sender.state.rawValue == 1{
+                        currentRadius = currentSquare!.scaleFactor
+                    }
+                    currentSquare?.rotation = sender.rotation
+                    drawingView.items.remove(at: index)
+                    drawingView.items.append(currentSquare!)
+                case "Circle":
+                    currentCircle = (current as! Circle)
+                    if sender.state.rawValue == 1{
+                        currentRadius = currentCircle!.scaleFactor
+                    }
+                    currentCircle?.rotation = sender.rotation
+                    drawingView.items.remove(at: index)
+                    drawingView.items.append(currentCircle!)
+                case "Triangle":
+                    currentTriangle = (current as! Triangle)
+                    if sender.state.rawValue == 1{
+                        currentRadius = currentTriangle!.scaleFactor
+                    }
+                    currentTriangle?.rotation = sender.rotation
+                    drawingView.items.remove(at: index)
+                    drawingView.items.append(currentTriangle!)
+                default:
+                    break
+                }
+                print(sender.state.rawValue)
+            }
+        case .Erase:
+            break
+        }
+    }    
 }
-

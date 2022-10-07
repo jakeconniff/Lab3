@@ -13,6 +13,6 @@ class Functions {
     }
     //calculating triangle height using side length
     static func triHeight(x: CGFloat) -> CGFloat {
-        return sqrt(pow(x*2, 2) - pow(x,2))
+        return sqrt(pow(x, 2) - pow(x/2.0,2))
     }
 }

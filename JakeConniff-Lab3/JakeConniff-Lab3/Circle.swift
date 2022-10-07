@@ -9,8 +9,8 @@
 import UIKit
 
 class Circle: Shape {
-    required init(origin: CGPoint, color: UIColor, scale: CGFloat){
-        super.init(origin: origin, color: color, scale: scale)
+    required init(type: String, origin: CGPoint, color: UIColor, scale: CGFloat){
+        super.init(type: type, origin: origin, color: color, scale: scale)
     }
     
     required init(origin: CGPoint, color: UIColor) {
@@ -21,7 +21,9 @@ class Circle: Shape {
         self.color.setFill()
         
         self.path.addArc(withCenter: self.origin, radius: self.scaleFactor , startAngle: 0, endAngle: CGFloat(Float.pi * 2), clockwise: true)
-        path.fill()
+        self.path.rotate(by: self.rotation)
+        self.path.fill()
+        self.path.close()
     }
     
     override func contains(point: CGPoint) -> Bool {

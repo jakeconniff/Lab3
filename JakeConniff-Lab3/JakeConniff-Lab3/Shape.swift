@@ -15,12 +15,15 @@ import UIKit
 
 /// A `DrawingItem` that draws some shape to the screen.
 class Shape: DrawingItem {
+    var type : String
     var path : UIBezierPath
     var origin : CGPoint
     var color : UIColor
     var scaleFactor : CGFloat
-    required init(origin: CGPoint, color: UIColor, scale: CGFloat){
+    var rotation : CGFloat = 0
+    required init(type: String, origin: CGPoint, color: UIColor, scale: CGFloat){
         self.path = UIBezierPath()
+        self.type = type
         self.origin = origin
         self.color = color
         self.scaleFactor = scale

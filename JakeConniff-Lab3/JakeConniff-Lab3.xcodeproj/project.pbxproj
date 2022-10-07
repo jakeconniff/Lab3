@@ -11,6 +11,7 @@
 		DCAE7AD228EE858400B221C6 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD128EE858400B221C6 /* Circle.swift */; };
 		DCAE7AD628EE8DFB00B221C6 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD528EE8DFB00B221C6 /* Square.swift */; };
 		DCAE7AD828EE924300B221C6 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE7AD728EE924300B221C6 /* Triangle.swift */; };
+		DCC615B728EFAEAF0012049A /* bezierExtend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC615B628EFAEAF0012049A /* bezierExtend.swift */; };
 		DCCD414A28EDDD2F0075FD0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD414928EDDD2F0075FD0F /* AppDelegate.swift */; };
 		DCCD414C28EDDD2F0075FD0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD414B28EDDD2F0075FD0F /* SceneDelegate.swift */; };
 		DCCD414E28EDDD2F0075FD0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD414D28EDDD2F0075FD0F /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 		DCAE7AD128EE858400B221C6 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		DCAE7AD528EE8DFB00B221C6 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		DCAE7AD728EE924300B221C6 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		DCC615B628EFAEAF0012049A /* bezierExtend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bezierExtend.swift; sourceTree = "<group>"; };
 		DCCD414628EDDD2F0075FD0F /* JakeConniff-Lab3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JakeConniff-Lab3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCD414928EDDD2F0075FD0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCCD414B28EDDD2F0075FD0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,20 +72,21 @@
 		DCCD414828EDDD2F0075FD0F /* JakeConniff-Lab3 */ = {
 			isa = PBXGroup;
 			children = (
+				DCCD415228EDDD310075FD0F /* Assets.xcassets */,
 				DCCD414928EDDD2F0075FD0F /* AppDelegate.swift */,
 				DCCD414B28EDDD2F0075FD0F /* SceneDelegate.swift */,
 				DCCD414D28EDDD2F0075FD0F /* ViewController.swift */,
-				DCAE7AD728EE924300B221C6 /* Triangle.swift */,
 				DCCD416128EDDD4F0075FD0F /* DrawingView.swift */,
 				DCCD415F28EDDD490075FD0F /* DrawingItem.swift */,
 				DCCD415D28EDDD410075FD0F /* Shape.swift */,
 				DCAE7AD528EE8DFB00B221C6 /* Square.swift */,
-				DCCD414F28EDDD2F0075FD0F /* Main.storyboard */,
+				DCAE7AD128EE858400B221C6 /* Circle.swift */,
+				DCAE7AD728EE924300B221C6 /* Triangle.swift */,
 				DCAE7ACF28EE742900B221C6 /* Functions.swift */,
-				DCCD415228EDDD310075FD0F /* Assets.xcassets */,
+				DCC615B628EFAEAF0012049A /* bezierExtend.swift */,
+				DCCD414F28EDDD2F0075FD0F /* Main.storyboard */,
 				DCCD415428EDDD310075FD0F /* LaunchScreen.storyboard */,
 				DCCD415728EDDD310075FD0F /* Info.plist */,
-				DCAE7AD128EE858400B221C6 /* Circle.swift */,
 			);
 			path = "JakeConniff-Lab3";
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCAE7AD628EE8DFB00B221C6 /* Square.swift in Sources */,
+				DCC615B728EFAEAF0012049A /* bezierExtend.swift in Sources */,
 				DCCD414E28EDDD2F0075FD0F /* ViewController.swift in Sources */,
 				DCAE7AD228EE858400B221C6 /* Circle.swift in Sources */,
 				DCCD414A28EDDD2F0075FD0F /* AppDelegate.swift in Sources */,

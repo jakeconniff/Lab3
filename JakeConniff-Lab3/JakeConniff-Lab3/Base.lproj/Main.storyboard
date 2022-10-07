@@ -95,7 +95,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTD-AQ-y5a" customClass="DrawingView" customModule="JakeConniff_Lab3" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="580.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="7wh-y3-gQc" appends="YES" id="h3h-Rj-C7j"/>
+                                    <outletCollection property="gestureRecognizers" destination="dpc-NC-sdm" appends="YES" id="IvP-6m-Vii"/>
+                                </connections>
                             </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-xG-TLK">
+                                <rect key="frame" x="18" y="688" width="378" height="31"/>
+                            </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -110,12 +118,20 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ymi-y4-5IP" secondAttribute="bottom" constant="15" id="VHi-DY-mGU"/>
                             <constraint firstItem="iTD-AQ-y5a" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.75" id="Zd1-0e-qG5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iTD-AQ-y5a" secondAttribute="trailing" id="Zwa-NW-h24"/>
+                            <constraint firstItem="lzd-xG-TLK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iwx-N2-RUK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xY8-hj-LPa" secondAttribute="trailing" constant="20" id="jbx-H1-snf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="iTD-AQ-y5a" secondAttribute="top" id="lR8-zX-1Dk"/>
                             <constraint firstItem="Ymi-y4-5IP" firstAttribute="top" secondItem="dOQ-zd-1Ry" secondAttribute="bottom" constant="10" id="lt4-8p-Poy"/>
+                            <constraint firstItem="xY8-hj-LPa" firstAttribute="top" secondItem="lzd-xG-TLK" secondAttribute="bottom" constant="22" id="sqV-rW-Xgq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lzd-xG-TLK" secondAttribute="trailing" constant="20" id="w93-8v-4RU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bXg-sv-6Wj">
+                        <barButtonItem key="leftBarButtonItem" title="Save to Photos" id="vz7-6k-5Fl">
+                            <connections>
+                                <action selector="savePhoto:" destination="BYZ-38-t0r" id="nf1-dB-Gr3"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="Fq0-Lp-d4a">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -124,12 +140,27 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="alphaSlider" destination="lzd-xG-TLK" id="Fzi-TO-Fcl"/>
                         <outlet property="drawingView" destination="iTD-AQ-y5a" id="jX6-h1-5VT"/>
                         <outlet property="modeSegment" destination="Ymi-y4-5IP" id="uRx-A9-dt3"/>
+                        <outlet property="pinchGesture" destination="7wh-y3-gQc" id="W9U-wd-GVy"/>
+                        <outlet property="rotateGesture" destination="dpc-NC-sdm" id="m9v-zl-tee"/>
                         <outlet property="shapeSegment" destination="dOQ-zd-1Ry" id="v7r-hz-49q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="7wh-y3-gQc">
+                    <connections>
+                        <action selector="pinchActivated:" destination="BYZ-38-t0r" id="wyS-VT-dY7"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="UGB-tv-Mqz"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="dpc-NC-sdm">
+                    <connections>
+                        <action selector="rotateActivated:" destination="BYZ-38-t0r" id="tMm-vu-Wah"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="3G4-4D-NSA"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="939.13043478260875" y="69.642857142857139"/>
         </scene>

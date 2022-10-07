@@ -8,8 +8,8 @@
 import UIKit
 
 class Triangle: Shape{
-    public required init(origin: CGPoint, color: UIColor, scale: CGFloat){
-        super.init(origin: origin, color: color, scale: scale)
+    public required init(type: String, origin: CGPoint, color: UIColor, scale: CGFloat){
+        super.init(type: type, origin: origin, color: color, scale: scale)
     }
     
     //ignore
@@ -18,12 +18,16 @@ class Triangle: Shape{
     }
     
     override func draw(){
+        self.path.removeAllPoints()
         self.color.setFill()
+        //ogx, ogy-height
         self.path.move(to: CGPoint(x: self.origin.x, y: self.origin.y-Functions.triHeight(x: self.scaleFactor)))
+        //ogx+sidefactor, ogy+
         self.path.addLine(to: CGPoint(x: self.origin.x+self.scaleFactor, y: self.origin.y-Functions.triHeight(x: self.scaleFactor)))
         self.path.addLine(to: CGPoint(x: self.origin.x, y: self.origin.y + Functions.triHeight(x: self.scaleFactor)))
-        self.path.addLine(to: CGPoint(x:self.origin.x-Functions.triHeight(x: self.scaleFactor), y: self.origin.y-Functions.triHeight(x: self.scaleFactor)))
-        self.path.close()
+        self.path.addLine(to: CGPoint(x:self.origin.x-self.scaleFactor, y: self.origin.y-Functions.triHeight(x: self.scaleFactor)))
+        self.path.rotate(by: self.rotation)
         self.path.fill()
+        self.path.close()
     }
 }
